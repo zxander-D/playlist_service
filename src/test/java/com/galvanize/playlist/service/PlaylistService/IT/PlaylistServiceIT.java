@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 //@Transactional
-//@AutoConfigureRestDocs
+@AutoConfigureRestDocs
 public class PlaylistServiceIT {
 
     @Autowired
@@ -39,9 +39,8 @@ public class PlaylistServiceIT {
                 .content(playlistDTO)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.message").value("Successfully created"));
-//                .andDo(document("AddGuests"));
-
+                .andExpect(jsonPath("$.message").value("Successfully created"))
+                .andDo(document("AddPlaylist"));
     }
 
 }
