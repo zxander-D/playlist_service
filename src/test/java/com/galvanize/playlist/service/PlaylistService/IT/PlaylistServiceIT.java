@@ -102,4 +102,35 @@ public class PlaylistServiceIT {
                 .andDo(document("GetPlaylistSongs"));
     }
 
+    @Test
+    public void addMultipleSongsToPlaylist() throws Exception {
+        PlaylistDto playlistDTO = new PlaylistDto("myPlaylist");
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playlistDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        PlaylistSongsDTO song = new PlaylistSongsDTO("SONG1");
+        mockMvc.perform(post("/playlist/myPlaylist/addSong")
+                .content(objectMapper.writeValueAsString(song))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andDo(document("PostSong"));
+
+        PlaylistSongsDTO song1 = new PlaylistSongsDTO("SONG2");
+        mockMvc.perform(post("/playlist/myPlaylist/addSong")
+                .content(objectMapper.writeValueAsString(song1))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andDo(document("PostSong"));
+
+        mockMvc.perform(get("/playlist/myPlaylist"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(2))
+                .andExpect(jsonPath("[0].name").value("SONG1"))
+                .andExpect(jsonPath("[1].name").value("SONG2"))
+
+                .andDo(document("GetPlaylistSongs"));
+    }
+
 }
