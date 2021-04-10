@@ -34,7 +34,7 @@ public class PlaylistServiceIT {
     public void createPlaylist_SuccesMessage() throws Exception {
 
         String playlistDTO = "{\"name\":\"myNewPlaylist\", \"playlist\":[]}";
-        mockMvc.perform(post("/guests")
+        mockMvc.perform(post("/playlist")
                 .content(playlistDTO)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
