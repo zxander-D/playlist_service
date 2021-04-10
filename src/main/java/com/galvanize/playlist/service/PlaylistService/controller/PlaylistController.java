@@ -1,6 +1,7 @@
 package com.galvanize.playlist.service.PlaylistService.controller;
 
 import com.galvanize.playlist.service.PlaylistService.Exception.PlaylistExistException;
+import com.galvanize.playlist.service.PlaylistService.Exception.PlaylistNoNameException;
 import com.galvanize.playlist.service.PlaylistService.pojos.PlaylistDto;
 import com.galvanize.playlist.service.PlaylistService.pojos.PlaylistSongsDTO;
 import com.galvanize.playlist.service.PlaylistService.service.PlaylistService;
@@ -20,7 +21,7 @@ public class PlaylistController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String createPlaylist(@RequestBody PlaylistDto playlistDto) throws PlaylistExistException {
+    public String createPlaylist(@RequestBody PlaylistDto playlistDto) throws PlaylistExistException, PlaylistNoNameException {
         playlistService.create(playlistDto);
         return "{\"message\": \"Successfully created\"}";
     }

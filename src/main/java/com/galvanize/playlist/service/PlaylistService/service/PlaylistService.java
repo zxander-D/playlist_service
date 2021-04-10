@@ -1,6 +1,7 @@
 package com.galvanize.playlist.service.PlaylistService.service;
 
 import com.galvanize.playlist.service.PlaylistService.Exception.PlaylistExistException;
+import com.galvanize.playlist.service.PlaylistService.Exception.PlaylistNoNameException;
 import com.galvanize.playlist.service.PlaylistService.pojos.PlayListSongsEntity;
 import com.galvanize.playlist.service.PlaylistService.pojos.PlaylistDto;
 import com.galvanize.playlist.service.PlaylistService.pojos.PlaylistEntity;
@@ -22,7 +23,10 @@ public class PlaylistService {
     @Autowired
     private PlaylistSongsRepository playlistSongsRepository;
 
-    public void create(PlaylistDto playlistDto) throws PlaylistExistException {
+    public void create(PlaylistDto playlistDto) throws PlaylistExistException, PlaylistNoNameException {
+        if (playlistDto.getName().equals("")) {
+            throw new PlaylistNoNameException();
+        }
         PlaylistEntity entity = playlistRepository.findByName(playlistDto.getName());
         if (entity != null) {
             throw new PlaylistExistException();

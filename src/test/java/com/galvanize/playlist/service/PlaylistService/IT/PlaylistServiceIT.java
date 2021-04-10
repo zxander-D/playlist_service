@@ -153,4 +153,16 @@ public class PlaylistServiceIT {
 
     }
 
+    @Test
+    public void createPlaylist_NoNameMessage() throws Exception {
+
+        PlaylistDto playlistDTO = new PlaylistDto("");
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playlistDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.message").value("Name cannot be empty"))
+                .andDo(document("EmptyNamePlaylist"));
+    }
+
 }

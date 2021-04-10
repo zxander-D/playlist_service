@@ -45,3 +45,11 @@ include::{snippets}/DeleteSong/http-request.adoc[]
 
 .response
 include::{snippets}/DeleteSong/http-response.adoc[]
+
+EmptyNamePlaylist
+
+.request
+include::{snippets}/EmptyNamePlaylist/http-request.adoc[]
+
+.response
+include::{snippets}/EmptyNamePlaylist/http-response.adoc[]
