@@ -11,7 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -44,6 +47,26 @@ public class PlaylistServiceTest {
         assertThatThrownBy(() -> subject.create(playlistDto)).isInstanceOf(PlaylistExistException.class);
 
         verify(repository, never()).save(any());
+    }
+
+    @Test
+    public void fetchAllTest() {
+        PlaylistEntity entity1 = new PlaylistEntity("samplepl1");
+        PlaylistEntity entity2 = new PlaylistEntity("samplepl2");
+        when(repository.findAll()).thenReturn(
+                List.of(
+                       entity1,
+                        entity2
+                )
+        );
+
+        List<PlaylistDto> actual = subject.fetchAll();
+        assertThat(actual).isEqualTo(
+                List.of(
+                        new PlaylistDto("samplepl1"),
+                        new PlaylistDto("samplepl2")
+                )
+        );
     }
 
 }

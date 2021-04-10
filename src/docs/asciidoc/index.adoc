@@ -6,9 +6,16 @@ include::{snippets}/AddPlaylist/http-request.adoc[]
 .response
 include::{snippets}/AddPlaylist/http-response.adoc[]
 
+GetPlaylist
+.request
+include::{snippets}/GetPlaylist/http-request.adoc[]
+
+.response
+include::{snippets}/GetPlaylist/http-response.adoc[]
+
 AddDuplicatePlaylist
 .request
-include::{snippets}/AddDuplicatePlaylist/http-request.adoc[]
+include::{snippets}/GetPlaylist/http-request.adoc[]
 
 .response
 include::{snippets}/AddDuplicatePlaylist/http-response.adoc[]

@@ -7,6 +7,9 @@ import com.galvanize.playlist.service.PlaylistService.repository.PlaylistReposit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PlaylistService {
 
@@ -20,5 +23,13 @@ public class PlaylistService {
         } else {
             playlistRepository.save(new PlaylistEntity(playlistDto.getName()));
         }
+    }
+
+    public List<PlaylistDto> fetchAll() {
+        List<PlaylistEntity> entities = playlistRepository.findAll();
+        return playlistRepository.findAll()
+                .stream()
+                .map(playlistEntity -> new PlaylistDto(playlistEntity.getName()))
+                .collect(Collectors.toList());
     }
 }

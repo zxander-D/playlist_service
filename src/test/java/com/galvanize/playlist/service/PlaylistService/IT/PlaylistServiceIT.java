@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -61,6 +62,21 @@ public class PlaylistServiceIT {
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.message").value("Playlist Exists"))
                 .andDo(document("AddDuplicatePlaylist"));
+    }
+
+    @Test
+    public void getPlaylistsTest() throws Exception {
+
+        PlaylistDto playlistDTO = new PlaylistDto("myPlaylist");
+        mockMvc.perform(post("/playlist")
+                .content(objectMapper.writeValueAsString(playlistDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+        mockMvc.perform(get("/playlist"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(1))
+                .andExpect(jsonPath("[0].name").value("myPlaylist"))
+                .andDo(document("GetPlaylist"));
     }
 
 }
