@@ -53,4 +53,15 @@ public class PlaylistService {
                 .map(playlistEntity -> new PlaylistSongsDTO(playlistEntity.getName()))
                 .collect(Collectors.toList());
     }
+
+    public void deleteSong(String name, PlaylistSongsDTO songDTO) {
+        PlaylistEntity entity = playlistRepository.findByName(name);
+        List<PlayListSongsEntity> songsEntity = playlistSongsRepository.findByPlaylistEntity(entity);
+        songsEntity.forEach(abc -> {
+            if (abc.getName().equals(songDTO.getName())) {
+                playlistSongsRepository.delete(abc);
+            }
+
+        });
+    }
 }

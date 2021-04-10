@@ -37,6 +37,12 @@ public class PlaylistController {
         playlistService.addSong(name, songDTO);
     }
 
+    @PostMapping("{name}/deleteSong")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void deleteSong(@PathVariable String name, @RequestBody PlaylistSongsDTO songDTO) {
+        playlistService.deleteSong(name, songDTO);
+    }
+
     @GetMapping("{name}")
     public List<PlaylistSongsDTO> findSongs(@PathVariable String name) {
         return playlistService.findSongs(name);

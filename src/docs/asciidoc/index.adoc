@@ -37,3 +37,11 @@ include::{snippets}/GetPlaylistSongs/http-request.adoc[]
 
 .response
 include::{snippets}/GetPlaylistSongs/http-response.adoc[]
+
+DeleteSong
+
+.request
+include::{snippets}/DeleteSong/http-request.adoc[]
+
+.response
+include::{snippets}/DeleteSong/http-response.adoc[]
