@@ -28,7 +28,7 @@ When retrieve the playlist
 
 ## Docker commands
 
-docker build -t guestbook:dev .
+```docker build -t <name>:dev .```
 
 # Setup
 ## Postgres

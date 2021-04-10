@@ -1,17 +1,14 @@
 package com.galvanize.playlist.service.PlaylistService.pojos;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlaylistDto {
+public class PlaylistSongsDTO {
     String name;
-    List<PlaylistDto> songs;
-
-    public PlaylistDto(String name) {
-        this.name = name;
-    }
 }

@@ -6,24 +6,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @EqualsAndHashCode
 @NoArgsConstructor
 @Getter
 @Setter
-public class PlaylistEntity {
+public class PlayListSongsEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
 
-    @OneToMany
-    private List<PlayListSongsEntity> songs;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private PlaylistEntity playlistEntity;
 
-    public PlaylistEntity(String name) {
+    public PlayListSongsEntity(String name) {
         this.name = name;
     }
 }

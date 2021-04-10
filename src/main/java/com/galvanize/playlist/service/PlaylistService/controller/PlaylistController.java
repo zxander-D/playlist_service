@@ -2,6 +2,7 @@ package com.galvanize.playlist.service.PlaylistService.controller;
 
 import com.galvanize.playlist.service.PlaylistService.Exception.PlaylistExistException;
 import com.galvanize.playlist.service.PlaylistService.pojos.PlaylistDto;
+import com.galvanize.playlist.service.PlaylistService.pojos.PlaylistSongsDTO;
 import com.galvanize.playlist.service.PlaylistService.service.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,5 +29,16 @@ public class PlaylistController {
     public List<PlaylistDto> getPlaylist() {
        List<PlaylistDto> dtos = playlistService.fetchAll();
        return dtos;
+    }
+
+    @PostMapping("{name}/addSong")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addSong(@PathVariable String name, @RequestBody PlaylistSongsDTO songDTO) {
+        playlistService.addSong(name, songDTO);
+    }
+
+    @GetMapping("{name}")
+    public List<PlaylistSongsDTO> findSongs(@PathVariable String name) {
+        return playlistService.findSongs(name);
     }
 }
