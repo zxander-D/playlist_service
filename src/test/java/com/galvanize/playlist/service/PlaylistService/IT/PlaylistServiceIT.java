@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -31,13 +32,14 @@ public class PlaylistServiceIT {
         Then a confirmation is returned that it was successful.
         And the playlist is empty.*/
     @Test
-    public void createPlaylist_SuccesMessage() throws Exception {
+    public void createPlaylist_SuccessMessage() throws Exception {
 
         String playlistDTO = "{\"name\":\"myNewPlaylist\", \"playlist\":[]}";
         mockMvc.perform(post("/playlist")
                 .content(playlistDTO)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.message").value("Successfully created"));
 //                .andDo(document("AddGuests"));
 
     }

@@ -14,6 +14,6 @@ public class PlaylistController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String createPlaylist(String newPlaylist){
-        return null;
+        return "{\"message\": \"Successfully created\"}";
     }
 }
