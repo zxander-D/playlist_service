@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Transactional
 @AutoConfigureRestDocs
-@ActiveProfiles("local")
+//@ActiveProfiles("local")
 public class PlaylistServiceIT {
 
     @Autowired
