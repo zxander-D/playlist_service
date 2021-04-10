@@ -28,9 +28,6 @@ public class PlaylistServiceIT {
     @Autowired
     ObjectMapper objectMapper;
 
-    /*    When a playlist is created with a name
-        Then a confirmation is returned that it was successful.
-        And the playlist is empty.*/
     @Test
     public void createPlaylist_SuccessMessage() throws Exception {
 
@@ -41,6 +38,26 @@ public class PlaylistServiceIT {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value("Successfully created"))
                 .andDo(document("AddPlaylist"));
+    }
+
+    @Test
+    public void createDuplicatePlaylist_UnSuccessMessage() throws Exception {
+
+        String playlistDTO1 = "{\"name\":\"myNewPlaylist\", \"playlist\":[]}";
+        mockMvc.perform(post("/playlist")
+                .content(playlistDTO1)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.message").value("Successfully created"))
+                .andDo(document("AddPlaylist"));
+
+        String playlistDTO2 = "{\"name\":\"myNewPlaylist\", \"playlist\":[]}";
+        mockMvc.perform(post("/playlist")
+                .content(playlistDTO2)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.message").value("Playlist Exists"))
+                .andDo(document("AddDuplicatePlaylist"));
     }
 
 }

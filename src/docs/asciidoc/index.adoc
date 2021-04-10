@@ -5,3 +5,10 @@ include::{snippets}/AddPlaylist/http-request.adoc[]
 
 .response
 include::{snippets}/AddPlaylist/http-response.adoc[]
+
+AddDuplicatePlaylist
+.request
+include::{snippets}/AddDuplicatePlaylist/http-request.adoc[]
+
+.response
+include::{snippets}/AddDuplicatePlaylist/http-response.adoc[]
