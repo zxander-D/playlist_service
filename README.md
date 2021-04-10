@@ -30,20 +30,8 @@ When retrieve the playlist
 
 docker build -t guestbook:dev .
 
-Setup
-```
-docker network create --driver bridge guestbook-net
-docker run --name guestbook_pg --network guestbook-net -e POSTGRES_PASSWORD=GuestsAreAwesome -e POSTGRES_DB=guestbook_db -d postgres
-```
-Run
-```
-docker run --name guestbook1 --network guestbook-net -e SPRING_PROFILES_ACTIVE=docker -e PORT=8080 -p 9000:8080 -d guestbook:dev
-```
-Postgress
-```
-docker run --name my-postgres -e POSTGRES_PASSWORD=open -e POSTGRES_DB=playlist_db -p 5432:5432 -d postgres
-```
-### Postgres setup
+# Setup
+## Postgres
 ```
 docker network create --driver bridge playlist-net
 docker run --name playlist_pg --network playlist-net -e POSTGRES_PASSWORD=abcd -e POSTGRES_DB=playlist_db -d postgres
@@ -52,3 +40,9 @@ docker run --name playlist_pg --network playlist-net -e POSTGRES_PASSWORD=abcd -
 ```
 docker run --name playlist1 --network playlist-net -e SPRING_PROFILES_ACTIVE=docker -e PORT=8080 -p 9000:8080 -d playlist:dev
 ```
+## Integration postgres: profile=local
+```
+docker run --name my-postgres -e POSTGRES_PASSWORD=open -e POSTGRES_DB=playlist_db -p 5432:5432 -d postgres
+```
+# Restdoc link
+https://playlist-assignment.herokuapp.com/docs/index.html
