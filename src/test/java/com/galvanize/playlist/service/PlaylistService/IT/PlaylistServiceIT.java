@@ -1,6 +1,7 @@
 package com.galvanize.playlist.service.PlaylistService.IT;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.galvanize.playlist.service.PlaylistService.pojos.PlaylistDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -18,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-//@Transactional
+@Transactional
 @AutoConfigureRestDocs
 public class PlaylistServiceIT {
 
@@ -31,9 +32,9 @@ public class PlaylistServiceIT {
     @Test
     public void createPlaylist_SuccessMessage() throws Exception {
 
-        String playlistDTO = "{\"name\":\"myNewPlaylist\", \"playlist\":[]}";
+        PlaylistDto playlistDTO = new PlaylistDto("myPlaylist");
         mockMvc.perform(post("/playlist")
-                .content(playlistDTO)
+                .content(objectMapper.writeValueAsString(playlistDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value("Successfully created"))
@@ -43,17 +44,17 @@ public class PlaylistServiceIT {
     @Test
     public void createDuplicatePlaylist_UnSuccessMessage() throws Exception {
 
-        String playlistDTO1 = "{\"name\":\"myNewPlaylist\", \"playlist\":[]}";
+        PlaylistDto playlistDTO = new PlaylistDto("myPlaylist");
         mockMvc.perform(post("/playlist")
-                .content(playlistDTO1)
+                .content(objectMapper.writeValueAsString(playlistDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value("Successfully created"))
                 .andDo(document("AddPlaylist"));
 
-        String playlistDTO2 = "{\"name\":\"myNewPlaylist\", \"playlist\":[]}";
+        PlaylistDto playlistDTO1 = new PlaylistDto("myPlaylist");
         mockMvc.perform(post("/playlist")
-                .content(playlistDTO2)
+                .content(objectMapper.writeValueAsString(playlistDTO1))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.message").value("Playlist Exists"))
