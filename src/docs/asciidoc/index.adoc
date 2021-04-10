@@ -7,6 +7,7 @@ include::{snippets}/AddPlaylist/http-request.adoc[]
 include::{snippets}/AddPlaylist/http-response.adoc[]
 
 GetPlaylist
+
 .request
 include::{snippets}/GetPlaylist/http-request.adoc[]
 
@@ -14,8 +15,25 @@ include::{snippets}/GetPlaylist/http-request.adoc[]
 include::{snippets}/GetPlaylist/http-response.adoc[]
 
 AddDuplicatePlaylist
+
 .request
-include::{snippets}/GetPlaylist/http-request.adoc[]
+include::{snippets}/AddDuplicatePlaylist/http-request.adoc[]
 
 .response
 include::{snippets}/AddDuplicatePlaylist/http-response.adoc[]
+
+PostSong
+
+.request
+include::{snippets}/PostSong/http-request.adoc[]
+
+.response
+include::{snippets}/PostSong/http-response.adoc[]
+
+GetPlaylistSongs
+
+.request
+include::{snippets}/GetPlaylistSongs/http-request.adoc[]
+
+.response
+include::{snippets}/GetPlaylistSongs/http-response.adoc[]

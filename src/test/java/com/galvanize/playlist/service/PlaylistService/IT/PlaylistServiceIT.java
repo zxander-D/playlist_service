@@ -91,12 +91,15 @@ public class PlaylistServiceIT {
         mockMvc.perform(post("/playlist/myPlaylist/addSong")
                 .content(objectMapper.writeValueAsString(song))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andDo(document("PostSong"));
 
         mockMvc.perform(get("/playlist/myPlaylist"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
-                .andExpect(jsonPath("[0].name").value("SONG1"));
+                .andExpect(jsonPath("[0].name").value("SONG1"))
+
+                .andDo(document("GetPlaylistSongs"));
     }
 
 }
